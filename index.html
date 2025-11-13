@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ayam Goreng Burus Laos Mama Yati</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        header {
+            text-align: center;
+            background-color: #ffcc00;
+            padding: 20px;
+            border-radius: 8px;
+        }
+        h1 {
+            margin: 0;
+            color: #333;
+        }
+        .menu {
+            margin: 20px 0;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .menu-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+        }
+        .menu-item:last-child {
+            border-bottom: none;
+        }
+        .note {
+            font-style: italic;
+            color: #666;
+            margin-top: 10px;
+        }
+        form {
+            margin: 20px 0;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        label {
+            display: block;
+            margin-bottom: 10px;
+        }
+        input, select, textarea {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            background-color: #28a745;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        .payment-info {
+            margin-top: 20px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Ayam Goreng Burus Laos Mama Yati</h1>
+        <p>Alamat: Jl. Raya Beji Depan(sebrang) Counter Kavin Cell sebelah barat warung madura dan warung nasgor cakman</p>
+    </header>
+
+    <section class="menu">
+        <h2>Daftar Menu</h2>
+        <div class="menu-item">
+            <span>Ayam Goreng</span>
+            <span>Rp 8.000</span>
+        </div>
+        <div class="menu-item">
+            <span>Nasi Ayam</span>
+            <span>Rp 12.000</span>
+        </div>
+        <div class="menu-item">
+            <span>Nasi Putih</span>
+            <span>Rp 4.000</span>
+        </div>
+        <div class="menu-item">
+            <span>Ati Ampela</span>
+            <span>Rp 6.000</span>
+        </div>
+        <div class="menu-item">
+            <span>Tahu/Tempe</span>
+            <span>Rp 1.000</span>
+        </div>
+        <div class="menu-item">
+            <span>Sate Brutu</span>
+            <span>Rp 3.500</span>
+        </div>
+        <div class="menu-item">
+            <span>Kepala</span>
+            <span>Rp 2.500</span>
+        </div>
+        <p class="note">Semua menu sudah free sambel dan lalaban. Ayam Goreng tinggal request bagian (dada, paha atas, paha bawah, sayap). Jika tidak ada stok, disesuaikan dengan stok yang tersedia.</p>
+    </section>
+
+    <form id="orderForm">
+        <h2>Pesan Sekarang</h2>
+        <label for="menu">Pilih Menu:</label>
+        <select id="menu" name="menu" required>
+            <option value="">-- Pilih Menu --</option>
+            <option value="Ayam Goreng">Ayam Goreng - Rp 8.000</option>
+            <option value="Nasi Ayam">Nasi Ayam - Rp 12.000</option>
+            <option value="Nasi Putih">Nasi Putih - Rp 4.000</option>
+            <option value="Ati Ampela">Ati Ampela - Rp 6.000</option>
+            <option value="Tahu/Tempe">Tahu/Tempe - Rp 1.000</option>
+            <option value="Sate Brutu">Sate Brutu - Rp 3.500</option>
+            <option value="Kepala">Kepala - Rp 2.500</option>
+        </select>
+
+        <label for="quantity">Jumlah:</label>
+        <input type="number" id="quantity" name="quantity" min="1" required>
+
+        <label for="request">Request Khusus (misal bagian ayam):</label>
+        <textarea id="request" name="request" rows="3"></textarea>
+
+        <label for="delivery">Pilih Pengiriman:</label>
+        <select id="delivery" name="delivery" required onchange="toggleAddress()">
+            <option value="">-- Pilih --</option>
+            <option value="ambil">Ambil di Warung</option>
+            <option value="antar">Diantar</option>
+        </select>
+
+        <div id="addressSection" class="hidden">
+            <label for="address">Alamat Lengkap:</label>
+            <textarea id="address" name="address" rows="3"></textarea>
+            <p class="note">Untuk ongkir, silakan nego langsung ke WA: 089685486771 setelah submit pesanan.</p>
+        </div>
+
+        <button type="submit">Kirim Pesanan</button>
+    </form>
+
+    <section class="payment-info">
+        <h2>Informasi Pembayaran</h2>
+        <p>Pembayaran dapat dilakukan melalui QRIS, DANA, OVO, GOPAY, SHOPEEPAY, atau transfer bank. Setelah submit pesanan, kami akan konfirmasi via WhatsApp.</p>
+    </section>
+
+    <script>
+        function toggleAddress() {
+            const delivery = document.getElementById('delivery').value;
+            const addressSection = document.getElementById('addressSection');
+            if (delivery === 'antar') {
+                addressSection.classList.remove('hidden');
+            } else {
+                addressSection.classList.add('hidden');
+            }
+        }
+
+        document.getElementById('orderForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const formData = new FormData(this);
+            let message = 'Halo, saya mau pesan:\n';
+            message += 'Menu: ' + formData.get('menu') + '\n';
+            message += 'Jumlah: ' + formData.get('quantity') + '\n';
+            if (formData.get('request')) {
+                message += 'Request: ' + formData.get('request') + '\n';
+            }
+            message += 'Pengiriman: ' + formData.get('delivery') + '\n';
+            if (formData.get('delivery') === 'antar') {
+                message += 'Alamat: ' + formData.get('address') + '\n';
+                message += 'Mohon info ongkir.';
+            }
+            // Redirect ke WhatsApp
+            const whatsappUrl = 'https://wa.me/089685486771?text=' + encodeURIComponent(message);
+            window.location.href = whatsappUrl;
+            // Reset form setelah redirect (opsional, tapi mungkin tidak terlihat)
+            this.reset();
+            document.getElementById('addressSection').classList.add('hidden');
+        });
+    </script>
+</body>
+</html>
