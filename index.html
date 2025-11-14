@@ -8,78 +8,84 @@
         body {
             font-family: Arial, sans-serif;
             margin: 0;
-            padding: 20px;
+            padding: 0;
             background-color: #f4f4f4;
             color: #333;
         }
         header {
+            background-color: #d32f2f; /* Merah khas ayam goreng */
+            color: white;
             text-align: center;
-            background-color: #ffcc00;
             padding: 20px;
-            border-radius: 8px;
         }
-        h1 {
-            margin: 0;
-            color: #333;
-        }
-        .menu {
-            margin: 20px 0;
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
             padding: 20px;
-            background-color: #fff;
+            background-color: white;
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h2 {
+            color: #d32f2f;
         }
         .menu-item {
-            display: flex;
-            justify-content: space-between;
-            padding: 10px 0;
-            border-bottom: 1px solid #eee;
+            margin-bottom: 15px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
         }
-        .menu-item:last-child {
-            border-bottom: none;
-        }
-        .note {
-            font-style: italic;
-            color: #666;
-            margin-top: 10px;
-        }
-        form {
-            margin: 20px 0;
-            padding: 20px;
-            background-color: #fff;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-        }
-        label {
+        .menu-item label {
             display: block;
-            margin-bottom: 10px;
+            margin-bottom: 5px;
         }
-        input, select, textarea {
+        .menu-item select {
+            margin-left: 10px;
+        }
+        .order-section {
+            margin-top: 20px;
+        }
+        .order-section input, .order-section select {
             width: 100%;
-            padding: 8px;
+            padding: 10px;
             margin-bottom: 10px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .delivery-option {
+            display: none;
         }
         button {
-            background-color: #28a745;
+            background-color: #d32f2f;
             color: white;
-            padding: 10px 20px;
             border: none;
-            border-radius: 4px;
+            padding: 10px 20px;
+            border-radius: 5px;
             cursor: pointer;
+            font-size: 16px;
         }
         button:hover {
-            background-color: #218838;
+            background-color: #b71c1c;
         }
-        .payment-info {
+        footer {
+            text-align: center;
+            padding: 10px;
+            background-color: #d32f2f;
+            color: white;
+            margin-top: 20px;
+        }
+        .struk {
+            display: none;
             margin-top: 20px;
             padding: 20px;
-            background-color: #fff;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 5px;
         }
-        .hidden {
+        .struk pre {
+            white-space: pre-wrap;
+        }
+        canvas {
             display: none;
         }
     </style>
@@ -87,115 +93,329 @@
 <body>
     <header>
         <h1>Ayam Goreng Burus Laos Mama Yati</h1>
-        <p>Alamat: Jl. Raya Beji Depan(sebrang) Counter Kavin Cell sebelah barat warung madura dan warung nasgor cakman</p>
+        <p>Jl. Raya Beji Depan(sebrang) Counter Kavin Cell sebelah barat warung madura dan warung nasgor cakman</p>
     </header>
 
-    <section class="menu">
+    <div class="container">
         <h2>Daftar Menu</h2>
-        <div class="menu-item">
-            <span>Ayam Goreng</span>
-            <span>Rp 8.000</span>
-        </div>
-        <div class="menu-item">
-            <span>Nasi Ayam</span>
-            <span>Rp 12.000</span>
-        </div>
-        <div class="menu-item">
-            <span>Nasi Putih</span>
-            <span>Rp 4.000</span>
-        </div>
-        <div class="menu-item">
-            <span>Ati Ampela</span>
-            <span>Rp 6.000</span>
-        </div>
-        <div class="menu-item">
-            <span>Tahu/Tempe</span>
-            <span>Rp 1.000</span>
-        </div>
-        <div class="menu-item">
-            <span>Sate Brutu</span>
-            <span>Rp 3.500</span>
-        </div>
-        <div class="menu-item">
-            <span>Kepala</span>
-            <span>Rp 2.500</span>
-        </div>
-        <p class="note">Semua menu sudah free sambel dan lalaban. Ayam Goreng tinggal request bagian (dada, paha atas, paha bawah, sayap). Jika tidak ada stok, disesuaikan dengan stok yang tersedia.</p>
-    </section>
+        <p>Semua menu sudah free sambel plus lalaban. Jika stok habis, akan disesuaikan dengan stok yang tersedia.</p>
 
-    <form id="orderForm">
-        <h2>Pesan Sekarang</h2>
-        <label for="menu">Pilih Menu:</label>
-        <select id="menu" name="menu" required>
-            <option value="">-- Pilih Menu --</option>
-            <option value="Ayam Goreng">Ayam Goreng - Rp 8.000</option>
-            <option value="Nasi Ayam">Nasi Ayam - Rp 12.000</option>
-            <option value="Nasi Putih">Nasi Putih - Rp 4.000</option>
-            <option value="Ati Ampela">Ati Ampela - Rp 6.000</option>
-            <option value="Tahu/Tempe">Tahu/Tempe - Rp 1.000</option>
-            <option value="Sate Brutu">Sate Brutu - Rp 3.500</option>
-            <option value="Kepala">Kepala - Rp 2.500</option>
-        </select>
-
-        <label for="quantity">Jumlah:</label>
-        <input type="number" id="quantity" name="quantity" min="1" required>
-
-        <label for="request">Request Khusus (misal bagian ayam):</label>
-        <textarea id="request" name="request" rows="3"></textarea>
-
-        <label for="delivery">Pilih Pengiriman:</label>
-        <select id="delivery" name="delivery" required onchange="toggleAddress()">
-            <option value="">-- Pilih --</option>
-            <option value="ambil">Ambil di Warung</option>
-            <option value="antar">Diantar</option>
-        </select>
-
-        <div id="addressSection" class="hidden">
-            <label for="address">Alamat Lengkap:</label>
-            <textarea id="address" name="address" rows="3"></textarea>
-            <p class="note">Untuk ongkir, silakan nego langsung ke WA: 089685486771 setelah submit pesanan.</p>
+        <div class="menu-item">
+            <label><input type="checkbox" id="ayam-goreng"> Ayam Goreng - Rp 8.000</label>
+            <label>Jumlah: 
+                <select id="qty-ayam">
+                    <option value="0">0</option>
+                    <!-- Generate options 1-100 -->
+                    <script>
+                        for (let i = 1; i <= 100; i++) {
+                            document.write('<option value="' + i + '">' + i + '</option>');
+                        }
+                    </script>
+                </select>
+            </label>
+            <label>Bagian: 
+                <select id="bagian-ayam">
+                    <option value="">Pilih bagian</option>
+                    <option value="Dada">Dada</option>
+                    <option value="Paha Atas">Paha Atas</option>
+                    <option value="Paha Bawah">Paha Bawah</option>
+                    <option value="Sayap">Sayap</option>
+                </select>
+            </label>
         </div>
 
-        <button type="submit">Kirim Pesanan</button>
-    </form>
+        <div class="menu-item">
+            <label><input type="checkbox" id="nasi-ayam"> Nasi Ayam - Rp 12.000</label>
+            <label>Jumlah: 
+                <select id="qty-nasi-ayam">
+                    <option value="0">0</option>
+                    <script>
+                        for (let i = 1; i <= 100; i++) {
+                            document.write('<option value="' + i + '">' + i + '</option>');
+                        }
+                    </script>
+                </select>
+            </label>
+            <label>Bagian: 
+                <select id="bagian-nasi-ayam">
+                    <option value="">Pilih bagian</option>
+                    <option value="Dada">Dada</option>
+                    <option value="Paha Atas">Paha Atas</option>
+                    <option value="Paha Bawah">Paha Bawah</option>
+                    <option value="Sayap">Sayap</option>
+                </select>
+            </label>
+        </div>
 
-    <section class="payment-info">
-        <h2>Informasi Pembayaran</h2>
-        <p>Pembayaran dapat dilakukan melalui QRIS, DANA, OVO, GOPAY, SHOPEEPAY, atau transfer bank. Setelah submit pesanan, kami akan konfirmasi via WhatsApp.</p>
-    </section>
+        <div class="menu-item">
+            <label><input type="checkbox" id="nasi-putih"> Nasi Putih - Rp 4.000</label>
+            <label>Jumlah: 
+                <select id="qty-nasi-putih">
+                    <option value="0">0</option>
+                    <script>
+                        for (let i = 1; i <= 100; i++) {
+                            document.write('<option value="' + i + '">' + i + '</option>');
+                        }
+                    </script>
+                </select>
+            </label>
+        </div>
+
+        <div class="menu-item">
+            <label><input type="checkbox" id="ati-ampela"> AtiAmpela - Rp 6.000</label>
+            <label>Jumlah: 
+                <select id="qty-ati-ampela">
+                    <option value="0">0</option>
+                    <script>
+                        for (let i = 1; i <= 100; i++) {
+                            document.write('<option value="' + i + '">' + i + '</option>');
+                        }
+                    </script>
+                </select>
+            </label>
+        </div>
+
+        <div class="menu-item">
+            <label><input type="checkbox" id="tahu-tempe"> Tahu/Tempe - Rp 1.000</label>
+            <label>Jumlah: 
+                <select id="qty-tahu-tempe">
+                    <option value="0">0</option>
+                    <script>
+                        for (let i = 1; i <= 100; i++) {
+                            document.write('<option value="' + i + '">' + i + '</option>');
+                        }
+                    </script>
+                </select>
+            </label>
+        </div>
+
+        <div class="menu-item">
+            <label><input type="checkbox" id="sate-brutu"> Sate Brutu - Rp 3.500</label>
+            <label>Jumlah: 
+                <select id="qty-sate-brutu">
+                    <option value="0">0</option>
+                    <script>
+                        for (let i = 1; i <= 100; i++) {
+                            document.write('<option value="' + i + '">' + i + '</option>');
+                        }
+                    </script>
+                </select>
+            </label>
+        </div>
+
+        <div class="menu-item">
+            <label><input type="checkbox" id="kepala"> Kepala - Rp 2.500</label>
+            <label>Jumlah: 
+                <select id="qty-kepala">
+                    <option value="0">0</option>
+                    <script>
+                        for (let i = 1; i <= 100; i++) {
+                            document.write('<option value="' + i + '">' + i + '</option>');
+                        }
+                    </script>
+                </select>
+            </label>
+        </div>
+
+        <div class="order-section">
+            <h2>Informasi Pemesanan</h2>
+            <label>Nama Pemesan: <input type="text" id="nama-pemesan" placeholder="Masukkan nama Anda"></label>
+            <label>Pilihan Pengiriman:
+                <select id="pengiriman">
+                    <option value="ambil">Ambil di Warung</option>
+                    <option value="antar">Diantar</option>
+                </select>
+            </label>
+            <div class="delivery-option" id="alamat-section">
+                <label>Alamat Lengkap: <input type="text" id="alamat" placeholder="Masukkan alamat lengkap"></label>
+                <p>Ongkir akan dinego melalui WhatsApp.</p>
+            </div>
+            <button onclick="pesan()">Pesan Sekarang</button>
+        </div>
+
+        <div class="struk" id="struk">
+            <h3>Bukti Pesanan</h3>
+            <pre id="struk-content"></pre>
+            <button onclick="downloadStruk()">Download Bukti Pesanan (JPG)</button>
+        </div>
+    </div>
+
+    <footer>
+        <p>By. Ayam Goreng MMY</p>
+    </footer>
+
+    <canvas id="struk-canvas" width="400" height="600"></canvas>
 
     <script>
-        function toggleAddress() {
-            const delivery = document.getElementById('delivery').value;
-            const addressSection = document.getElementById('addressSection');
-            if (delivery === 'antar') {
-                addressSection.classList.remove('hidden');
-            } else {
-                addressSection.classList.add('hidden');
-            }
+        // Function to auto-check checkbox when quantity > 0
+        function autoCheck(checkboxId, qtyId) {
+            const qtySelect = document.getElementById(qtyId);
+            const checkbox = document.getElementById(checkboxId);
+            qtySelect.addEventListener('change', function() {
+                if (parseInt(this.value) > 0) {
+                    checkbox.checked = true;
+                } else {
+                    checkbox.checked = false;
+                }
+            });
         }
 
-        document.getElementById('orderForm').addEventListener('submit', function(event) {
-            event.preventDefault();
-            const formData = new FormData(this);
-            let message = 'Halo, saya mau pesan:\n';
-            message += 'Menu: ' + formData.get('menu') + '\n';
-            message += 'Jumlah: ' + formData.get('quantity') + '\n';
-            if (formData.get('request')) {
-                message += 'Request: ' + formData.get('request') + '\n';
+        // Apply auto-check to all menu items
+        autoCheck('ayam-goreng', 'qty-ayam');
+        autoCheck('nasi-ayam', 'qty-nasi-ayam');
+        autoCheck('nasi-putih', 'qty-nasi-putih');
+        autoCheck('ati-ampela', 'qty-ati-ampela');
+        autoCheck('tahu-tempe', 'qty-tahu-tempe');
+        autoCheck('sate-brutu', 'qty-sate-brutu');
+        autoCheck('kepala', 'qty-kepala');
+
+        document.getElementById('pengiriman').addEventListener('change', function() {
+            const alamatSection = document.getElementById('alamat-section');
+            if (this.value === 'antar') {
+                alamatSection.style.display = 'block';
+            } else {
+                alamatSection.style.display = 'none';
             }
-            message += 'Pengiriman: ' + formData.get('delivery') + '\n';
-            if (formData.get('delivery') === 'antar') {
-                message += 'Alamat: ' + formData.get('address') + '\n';
-                message += 'Mohon info ongkir.';
-            }
-            // Redirect ke WhatsApp
-            const whatsappUrl = 'https://wa.me/089685486771?text=' + encodeURIComponent(message);
-            window.location.href = whatsappUrl;
-            // Reset form setelah redirect (opsional, tapi mungkin tidak terlihat)
-            this.reset();
-            document.getElementById('addressSection').classList.add('hidden');
         });
+
+        function pesan() {
+            const nama = document.getElementById('nama-pemesan').value;
+            const pengiriman = document.getElementById('pengiriman').value;
+            const alamat = document.getElementById('alamat').value;
+
+            if (!nama) {
+                alert('Silakan isi nama pemesan.');
+                return;
+            }
+
+            if (pengiriman === 'antar' && !alamat) {
+                alert('Silakan isi alamat lengkap untuk pengiriman.');
+                return;
+            }
+
+            let pesanan = [];
+            let total = 0;
+
+            // Ayam Goreng
+            const ayamChecked = document.getElementById('ayam-goreng').checked;
+            const qtyAyam = parseInt(document.getElementById('qty-ayam').value) || 0;
+            const bagianAyam = document.getElementById('bagian-ayam').value;
+            if (ayamChecked && qtyAyam > 0) {
+                if (!bagianAyam) {
+                    alert('Silakan pilih bagian untuk Ayam Goreng.');
+                    return;
+                }
+                pesanan.push(`Ayam Goreng (${bagianAyam}) x${qtyAyam} - Rp ${(8000 * qtyAyam).toLocaleString()}`);
+                total += 8000 * qtyAyam;
+            }
+
+            // Nasi Ayam
+            const nasiAyamChecked = document.getElementById('nasi-ayam').checked;
+            const qtyNasiAyam = parseInt(document.getElementById('qty-nasi-ayam').value) || 0;
+            const bagianNasiAyam = document.getElementById('bagian-nasi-ayam').value;
+            if (nasiAyamChecked && qtyNasiAyam > 0) {
+                if (!bagianNasiAyam) {
+                    alert('Silakan pilih bagian untuk Nasi Ayam.');
+                    return;
+                }
+                pesanan.push(`Nasi Ayam (${bagianNasiAyam}) x${qtyNasiAyam} - Rp ${(12000 * qtyNasiAyam).toLocaleString()}`);
+                total += 12000 * qtyNasiAyam;
+            }
+
+            // Nasi Putih
+            const nasiPutihChecked = document.getElementById('nasi-putih').checked;
+            const qtyNasiPutih = parseInt(document.getElementById('qty-nasi-putih').value) || 0;
+            if (nasiPutihChecked && qtyNasiPutih > 0) {
+                pesanan.push(`Nasi Putih x${qtyNasiPutih} - Rp ${(4000 * qtyNasiPutih).toLocaleString()}`);
+                total += 4000 * qtyNasiPutih;
+            }
+
+            // AtiAmpela
+            const atiAmpelaChecked = document.getElementById('ati-ampela').checked;
+            const qtyAtiAmpela = parseInt(document.getElementById('qty-ati-ampela').value) || 0;
+            if (atiAmpelaChecked && qtyAtiAmpela > 0) {
+                pesanan.push(`AtiAmpela x${qtyAtiAmpela} - Rp ${(6000 * qtyAtiAmpela).toLocaleString()}`);
+                total += 6000 * qtyAtiAmpela;
+            }
+
+            // Tahu/Tempe
+            const tahuTempeChecked = document.getElementById('tahu-tempe').checked;
+            const qtyTahuTempe = parseInt(document.getElementById('qty-tahu-tempe').value) || 0;
+            if (tahuTempeChecked && qtyTahuTempe > 0) {
+                pesanan.push(`Tahu/Tempe x${qtyTahuTempe} - Rp ${(1000 * qtyTahuTempe).toLocaleString()}`);
+                total += 1000 * qtyTahuTempe;
+            }
+
+            // Sate Brutu
+            const sateBrutuChecked = document.getElementById('sate-brutu').checked;
+            const qtySateBrutu = parseInt(document.getElementById('qty-sate-brutu').value) || 0;
+            if (sateBrutuChecked && qtySateBrutu > 0) {
+                pesanan.push(`Sate Brutu x${qtySateBrutu} - Rp ${(3500 * qtySateBrutu).toLocaleString()}`);
+                total += 3500 * qtySateBrutu;
+            }
+
+            // Kepala
+            const kepalaChecked = document.getElementById('kepala').checked;
+            const qtyKepala = parseInt(document.getElementById('qty-kepala').value) || 0;
+            if (kepalaChecked && qtyKepala > 0) {
+                pesanan.push(`Kepala x${qtyKepala} - Rp ${(2500 * qtyKepala).toLocaleString()}`);
+                total += 2500 * qtyKepala;
+            }
+
+            if (pesanan.length === 0) {
+                alert('Silakan pilih menu terlebih dahulu.');
+                return;
+            }
+
+            let struk = `Nama Pemesan: ${nama}\n`;
+            struk += `Pengiriman: ${pengiriman === 'antar' ? 'Diantar ke ' + alamat : 'Ambil di Warung'}\n\n`;
+            struk += 'Pesanan:\n';
+            pesanan.forEach(item => struk += item + '\n');
+            struk += `\nTotal: Rp ${total.toLocaleString()}\n`;
+            struk += 'Pembayaran via QRIS. Jika diantar, nego ongkir via WA.';
+
+            document.getElementById('struk-content').textContent = struk;
+            document.getElementById('struk').style.display = 'block';
+
+            // Redirect to WhatsApp
+            let waText = `Hallo Mama Yati, saya ${nama}, ingin memesan:\n`;
+            pesanan.forEach(item => waText += item + '\n');
+            waText += `\nPengiriman: ${pengiriman === 'antar' ? 'Diantar ke ' + alamat : 'Ambil di Warung'}\n`;
+            waText += 'Total: Rp ' + total.toLocaleString();
+
+            const waUrl = `https://wa.me/6289654247299?text=${encodeURIComponent(waText)}`;
+            window.open(waUrl, '_blank');
+        }
+
+        function downloadStruk() {
+            const strukContent = document.getElementById('struk-content').textContent;
+            const canvas = document.getElementById('struk-canvas');
+            const ctx = canvas.getContext('2d');
+
+            // Set canvas background
+            ctx.fillStyle = 'white';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            // Set text properties
+            ctx.fillStyle = 'black';
+            ctx.font = '16px Arial';
+            ctx.textBaseline = 'top';
+
+            // Split text into lines and draw
+            const lines = strukContent.split('\n');
+            let y = 20;
+            lines.forEach(line => {
+                ctx.fillText(line, 20, y);
+                y += 20;
+            });
+
+            // Convert to JPG and download
+            const dataURL = canvas.toDataURL('image/jpeg');
+            const a = document.createElement('a');
+            a.href = dataURL;
+            a.download = 'bukti_pesanan.jpg';
+            a.click();
+        }
     </script>
 </body>
 </html>
