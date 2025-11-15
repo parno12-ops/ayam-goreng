@@ -8,24 +8,26 @@
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
 <style>
   :root {
-    --primary-color: #ff7f00; /* oranye */
-    --secondary-color: #2e2e2e; /* abu gelap */
-    --text-light: #fff;
-    --text-dark: #222;
+    --primary-color:#ff9100; /* oranye hangat */
+    --primary-color-dark: #cc7a00;
+    --secondary-color:#2e2e2e;
+    --text-light:#fff;
+    --text-dark:#222;
   }
   html {
     scroll-behavior: smooth;
   }
   body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #fafafa;
+    background-color:#fafafa;
     color: var(--text-dark);
     margin:0;
   }
   /* Navbar */
   .navbar {
-    background-color: #fff;
+    background:#fff;
     box-shadow: 0 2px 6px rgb(0 0 0 / 0.1);
+    z-index:1030;
   }
   .navbar-brand {
     font-weight: 700;
@@ -49,16 +51,19 @@
   .nav-link:hover, .nav-link.active {
     color: var(--primary-color);
   }
-  .btn-pesan {
+  /* Tombol Pesan Sekarang navbar */
+  .btn-navbar-pesan {
     background-color: var(--primary-color);
     color: var(--text-light);
     font-weight: 700;
     border-radius: 50px;
-    padding: 8px 20px;
+    padding: 8px 22px;
+    cursor: pointer;
+    border:none;
     transition: background-color 0.3s ease;
   }
-  .btn-pesan:hover {
-    background-color: #e07000;
+  .btn-navbar-pesan:hover {
+    background-color: var(--primary-color-dark);
     color: var(--text-light);
   }
   /* Hero Section */
@@ -69,7 +74,7 @@
     display: flex;
     align-items: center;
     position: relative;
-    padding-top: 80px; /* untuk menghindari navbar */
+    padding-top: 80px; /* navbar height */
   }
   #hero::after {
     content: "";
@@ -107,27 +112,43 @@
     font-size: 1.2rem;
     margin-top: 0;
     max-width: 600px;
+    line-height: 1.5;
   }
   #hero .btn-group {
     margin-top: 25px;
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  #hero .btn-primary, #hero .btn-outline-light {
+    padding: 10px 28px;
+    font-weight: 600;
+    border-radius: 30px;
+    cursor: pointer;
+    border: none;
+    font-size: 1rem;
+    user-select: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    white-space: nowrap;
   }
   #hero .btn-primary {
     background-color: var(--primary-color);
-    border: none;
-    font-weight: 600;
-    box-shadow: 0 4px 10px rgb(255 127 0 / 0.45);
-    border-radius: 30px;
-    padding: 10px 22px;
-    cursor: pointer;
+    color: var(--text-light);
+    box-shadow: 0 4px 12px rgb(255 145 0 / 0.5);
+    transition: background-color 0.3s ease;
   }
   #hero .btn-primary:hover {
-    background-color: #e07000;
+    background-color: var(--primary-color-dark);
   }
   #hero .btn-outline-light {
-    font-weight: 600;
-    border-radius: 30px;
-    padding: 10px 22px;
-    cursor: pointer;
+    background: rgba(255 255 255 / 0.9);
+    color: var(--secondary-color);
+  }
+  #hero .btn-outline-light:hover {
+    background: var(--primary-color);
+    color: var(--text-light);
   }
   /* Info Boxes */
   #hero-info {
@@ -138,27 +159,27 @@
     flex-wrap: wrap;
   }
   #hero-info .info-box {
-    background: rgba(255 255 255 / 0.1);
+    background: rgba(255 255 255 / 0.15);
     border-radius: 12px;
     padding: 18px 25px;
     min-width: 140px;
     text-align: center;
     color: white;
-    box-shadow: 0 2px 6px rgb(0 0 0 / 0.25);
+    box-shadow: 0 2px 8px rgb(0 0 0 / 0.3);
   }
   #hero-info .info-box strong {
     display: block;
-    font-size: 1.6rem;
+    font-size: 1.7rem;
     font-weight: 700;
   }
   #hero-info .info-box span {
     display: block;
-    font-size: 0.85rem;
+    font-size: 0.9rem;
     margin-top: 5px;
     opacity: 0.85;
   }
 
-  /* Section titles */
+  /* Section Titles */
   section h2 {
     color: var(--primary-color);
     font-weight: 700;
@@ -198,7 +219,7 @@
     cursor: pointer;
   }
   #menu button:hover {
-    background-color: #e07000;
+    background-color: var(--primary-color-dark);
   }
   #menu p.gratis {
     font-weight: 600;
@@ -288,7 +309,7 @@
     cursor: pointer;
   }
   #pesan .whatsapp-btn:hover {
-    background-color: #e07000;
+    background-color: var(--primary-color-dark);
   }
   .delivery-note {
     font-size: 0.9rem;
@@ -386,7 +407,7 @@
     font-weight: 600;
     border-radius: 30px;
     padding: 10px 18px;
-    box-shadow: 0 2px 8px rgba(255,127,0,0.7);
+    box-shadow: 0 2px 8px rgba(255,145,0,0.7);
     display: flex;
     align-items: center;
     gap: 8px;
@@ -395,14 +416,106 @@
     transition: background-color 0.3s ease;
   }
   #chat-wa:hover {
-    background-color: #e07000;
+    background-color: var(--primary-color-dark);
   }
   #chat-wa i {
     font-size: 1.3rem;
   }
+  /* Keranjang icon popup popup */
+  #cart-popup {
+    position: fixed;
+    bottom: 70px;
+    right: 12px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.25);
+    max-width: 320px;
+    width: 90vw;
+    max-height: 360px;
+    overflow-y: auto;
+    z-index: 10000;
+    display: none;
+    flex-direction: column;
+  }
+  #cart-popup-header {
+    padding: 14px 18px;
+    font-weight: 700;
+    color: var(--primary-color);
+    border-bottom: 1px solid #ddd;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  #cart-popup-header button {
+    cursor: pointer;
+    border: none;
+    background: none;
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: var(--primary-color-dark);
+  }
+  #cart-popup-list {
+    padding: 14px 18px;
+  }
+  #cart-popup-list .cart-item-popup {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 12px;
+    font-weight: 600;
+  }
+  #cart-popup-list .cart-item-popup button {
+    background: none;
+    border: none;
+    color: var(--primary-color);
+    font-weight: 700;
+    cursor: pointer;
+    font-size: 1rem;
+  }
+  #cart-popup-footer {
+    padding: 10px 18px;
+    background: #f0f0f0;
+    font-weight: 700;
+    color: var(--primary-color);
+    text-align: right;
+    border-top: 1px solid #ddd;
+  }
+  /* Navbar cart icon + badge */
+  #navbar-cart {
+    position: relative;
+    cursor: pointer;
+    color: var(--secondary-color);
+    font-size: 1.35rem;
+    margin-left: 18px;
+    display: flex;
+    align-items: center;
+  }
+  #navbar-cart:hover {
+    color: var(--primary-color);
+  }
+  #navbar-cart .badge {
+    position: absolute;
+    top: -6px;
+    right: -8px;
+    color: white;
+    background: red;
+    font-size: 0.75rem;
+    font-weight: 700;
+    border-radius: 9999px;
+    padding: 2px 7px;
+    user-select: none;
+  }
 
   /* Responsive */
-  @media(max-width: 991px) {
+  @media(max-width:991px){
+    /* Navbar brand margin */
+    .navbar-logo-text {
+      display:none;
+    }
+    .btn-navbar-pesan {
+      padding: 8px 14px;
+      font-size: 0.85rem;
+    }
+    /* Smaller hero text */
     #hero h1 {
       font-size: 2.2rem;
     }
@@ -426,25 +539,34 @@
 <!-- Navbar -->
 <nav class="navbar navbar-expand-lg sticky-top">
   <div class="container">
-    <a class="navbar-brand" href="#hero">
+    <a class="navbar-brand" href="#hero" id="nav-logo">
       <i class="fas fa-utensils"></i>
-      <div>
+      <div class="navbar-logo-text ms-1">
         <div style="font-weight:bold; font-size:1.3rem;">Mama Yati</div>
         <div style="font-size: 0.75rem; line-height: 1;">Ayam Goreng Burus Laos</div>
       </div>
     </a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navmenu" aria-controls="navmenu" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navmenu"
+      aria-controls="navmenu" aria-expanded="false" aria-label="Toggle navigation" id="nav-toggler">
       <span class="navbar-toggler-icon"></span>
     </button>
+
     <div class="collapse navbar-collapse justify-content-end" id="navmenu">
       <ul class="navbar-nav align-items-center">
-        <li class="nav-item"><a class="nav-link" href="#hero">Beranda</a></li>
-        <li class="nav-item"><a class="nav-link" href="#menu">Menu</a></li>
-        <li class="nav-item"><a class="nav-link" href="#tentang-kami">Tentang Kami</a></li>
-        <li class="nav-item"><a class="nav-link" href="#testimoni">Testimoni</a></li>
-        <li class="nav-item"><a class="nav-link" href="#footer">Kontak</a></li>
-        <li class="nav-item"><a class="btn btn-pesan" href="#menu">Pesan Sekarang</a></li>
+        <li class="nav-item"><a class="nav-link" href="#hero" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show">Beranda</a></li>
+        <li class="nav-item"><a class="nav-link" href="#menu" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show">Menu</a></li>
+        <li class="nav-item"><a class="nav-link" href="#tentang-kami" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show">Tentang Kami</a></li>
+        <li class="nav-item"><a class="nav-link" href="#testimoni" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show">Testimoni</a></li>
+        <li class="nav-item"><a class="nav-link" href="#footer" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show">Kontak</a></li>
       </ul>
+      <!-- Button Pesan Sekarang dan Icon Keranjang Vertikal bersebelahan -->
+      <div class="d-flex align-items-center ms-3">
+        <button class="btn btn-navbar-pesan me-3" id="btn-navbar-pesan" type="button" aria-label="Pesan Sekarang">Pesan Sekarang</button>
+        <div id="navbar-cart" aria-label="Keranjang Belanja" title="Lihat Keranjang" tabindex="0">
+          <i class="fas fa-shopping-cart"></i>
+          <span class="badge" id="cart-count" style="display:none;">0</span>
+        </div>
+      </div>
     </div>
   </div>
 </nav>
@@ -454,24 +576,10 @@
   <div class="container text-white">
     <span class="badge-custom"><i class="fas fa-star"></i> Resep Turun Temurun</span>
     <h1>Ayam Goreng Burus Laos <br /> <span class="highlight">Mama Yati</span></h1>
-    <p>Nikmati kelezatan ayam goreng burus laos dengan bumbu rempah khas Mama Yati yang gurih dan renyah. Dimasak dengan resep tradisional yang telah diwariskan turun temurun, setiap gigitan memberikan cita rasa yang tak terlupakan.</p>
+    <p>Nikmati kelezatan ayam goreng burus laos dengan bumbu rempah khas Mama Yati yang gurih dan renyah. Dimasak dengan resep tradisional yang telah diwariskan turun-temurun, setiap gigitan memberikan cita rasa yang tak terlupakan.</p>
     <div class="btn-group">
       <button class="btn btn-primary" id="btn-lihat-menu"><i class="fas fa-utensils"></i> Lihat Menu</button>
       <button class="btn btn-outline-light" id="btn-hubungi-kami"><i class="fas fa-phone"></i> Hubungi Kami</button>
-    </div>
-    <div id="hero-info" class="mt-5">
-      <div class="info-box">
-        <strong>15+</strong>
-        <span>Tahun Berpengalaman</span>
-      </div>
-      <div class="info-box">
-        <strong>1000+</strong>
-        <span>Pelanggan Setia</span>
-      </div>
-      <div class="info-box">
-        <strong>4.9</strong>
-        <span>Rating Pelanggan</span>
-      </div>
     </div>
   </div>
 </section>
@@ -497,7 +605,6 @@
         </div>
       </div>
     </div>
-
     <!-- Nasi Ayam -->
     <div class="col-sm-6 col-lg-4">
       <div class="card">
@@ -514,7 +621,6 @@
         </div>
       </div>
     </div>
-
     <!-- Ati Ampela -->
     <div class="col-sm-6 col-lg-4">
       <div class="card">
@@ -524,7 +630,6 @@
         </div>
       </div>
     </div>
-
     <!-- Sate Brutu -->
     <div class="col-sm-6 col-lg-4">
       <div class="card">
@@ -534,7 +639,6 @@
         </div>
       </div>
     </div>
-
     <!-- Kepala Ayam -->
     <div class="col-sm-6 col-lg-4">
       <div class="card">
@@ -544,7 +648,6 @@
         </div>
       </div>
     </div>
-
     <!-- Tahu -->
     <div class="col-sm-6 col-lg-4">
       <div class="card">
@@ -554,7 +657,6 @@
         </div>
       </div>
     </div>
-
     <!-- Tempe -->
     <div class="col-sm-6 col-lg-4">
       <div class="card">
@@ -617,14 +719,14 @@
 
 <!-- Pesan Sekarang (Keranjang & Form) -->
 <section id="pesan" class="container my-5">
-  <h2 class="mb-4 text-center text-primary">Pesan Sekarang</h2>
+  <h2 class="mb-4 text-center" style="color: var(--primary-color); font-weight:700;">Pesan Sekarang</h2>
   <div class="row">
     <div class="col-lg-6 mb-4">
       <div class="card">
         <div class="card-body">
           <h3>Keranjang Belanja</h3>
-          <div id="cart-items" aria-live="polite" aria-atomic="true"></div>
-          <div id="total-price" class="text-end fs-4 fw-bold my-3 text-primary">Total: Rp0</div>
+          <div id="cart-items" aria-live="polite" aria-atomic="true" style="min-height: 100px;">Keranjang kosong</div>
+          <div id="total-price" class="text-end fs-4 fw-bold my-3" style="color: var(--primary-color);">Total: Rp0</div>
           <button class="btn btn-outline-danger w-100" onclick="clearCart()">Kosongkan Keranjang</button>
         </div>
       </div>
@@ -683,49 +785,96 @@
   <i class="fab fa-whatsapp"></i> Takon Disit
 </a>
 
+<!-- Pop-Up Keranjang -->
+<div id="cart-popup" aria-live="polite" aria-atomic="true" role="dialog" aria-modal="true" aria-labelledby="cart-popup-header" tabindex="-1">
+  <div id="cart-popup-header">
+    Keranjang Anda
+    <button aria-label="Tutup keranjang" id="btn-close-cart">&times;</button>
+  </div>
+  <div id="cart-popup-list">
+    <!-- daftar item keranjang muncul di sini -->
+  </div>
+  <div id="cart-popup-footer">
+    Total Harga: Rp<span id="cart-total">0</span>
+  </div>
+</div>
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script>
-  // Navigasi tombol hero Lihat Menu dan Hubungi Kami dengan scroll
-  document.getElementById('btn-lihat-menu').addEventListener('click', () => {
+  // Auto-close menu collapse on nav link click (mobile)
+  document.querySelectorAll('#navmenu .nav-link').forEach(link => {
+    link.addEventListener('click', () => {
+      const bsCollapse = bootstrap.Collapse.getInstance(document.getElementById('navmenu'));
+      if(bsCollapse) bsCollapse.hide();
+    });
+  });
+
+  // Scroll hero buttons
+  document.getElementById('btn-lihat-menu').addEventListener('click', e => {
+    e.preventDefault();
     document.getElementById('menu').scrollIntoView({behavior: 'smooth'});
   });
-  document.getElementById('btn-hubungi-kami').addEventListener('click', () => {
+  document.getElementById('btn-hubungi-kami').addEventListener('click', e => {
+    e.preventDefault();
     document.getElementById('footer').scrollIntoView({behavior: 'smooth'});
   });
 
-  // Keranjang dan pemesanan
+  // Scroll navbar Pesan Sekarang button
+  document.getElementById('btn-navbar-pesan').addEventListener('click', e => {
+    e.preventDefault();
+    document.getElementById('menu').scrollIntoView({behavior: 'smooth'});
+  });
+
+  // Keranjang belanja
   let cart = [];
 
   function updateCart() {
-    const cartItems = document.getElementById('cart-items');
-    cartItems.innerHTML = '';
+    const cartCount = document.getElementById('cart-count');
+    const itemCount = cart.length;
+    if(itemCount > 0){
+      cartCount.style.display = 'inline-block';
+      cartCount.textContent = itemCount;
+    } else {
+      cartCount.style.display = 'none';
+      closeCartPopup();
+    }
+    updateCartPopup();
+    updateCartSummary();
+  }
+  function updateCartSummary(){
+    const totalElem = document.getElementById('total-price');
+    const total = cart.reduce((acc,item) => acc + item.price, 0);
+    totalElem.textContent = `Total: Rp${total.toLocaleString('id-ID')}`;
+  }
+
+  function updateCartPopup(){
+    const listElem = document.getElementById('cart-popup-list');
+    const totalElem = document.getElementById('cart-total');
+    listElem.innerHTML = '';
     if(cart.length === 0){
-      cartItems.innerHTML = '<p class="text-muted">Keranjang kosong</p>';
-      updateTotal(0);
+      listElem.innerHTML = '<p>Keranjang kosong.</p>';
+      totalElem.textContent = '0';
       return;
     }
-    cart.forEach((item, index) => {
+    cart.forEach((item,index) => {
       const div = document.createElement('div');
-      div.className = 'cart-item';
+      div.className = 'cart-item-popup';
       div.innerHTML = `
         <span>${item.name} - Rp${item.price.toLocaleString('id-ID')}</span>
-        <button aria-label="Hapus item ${item.name}" onclick="removeItem(${index})" title="Hapus item">&times;</button>
+        <button aria-label="Hapus ${item.name}" onclick="removeItem(${index})">&times;</button>
       `;
-      cartItems.appendChild(div);
+      listElem.appendChild(div);
     });
-    updateTotal(cart.reduce((sum, i) => sum + i.price, 0));
+    const total = cart.reduce((acc,item) => acc+item.price,0);
+    totalElem.textContent = total.toLocaleString('id-ID');
   }
 
-  function updateTotal(value) {
-    document.getElementById('total-price').textContent = `Total: Rp${value.toLocaleString('id-ID')}`;
-  }
-
-  function removeItem(index) {
-    cart.splice(index, 1);
+  function removeItem(index){
+    cart.splice(index,1);
     updateCart();
   }
 
-  function clearCart() {
+  function clearCart(){
     cart = [];
     updateCart();
   }
@@ -740,16 +889,36 @@
         variant = document.getElementById(variantId).value;
       }
       const itemName = variant ? `${name} (${variant})` : name;
-      cart.push({ name: itemName, price });
+      cart.push({name: itemName, price});
       updateCart();
     });
   });
 
-  // Show/hide alamat input on pengambilan change
+  // Toggle popup cart on navbar-cart click
+  const cartIcon = document.getElementById('navbar-cart');
+  const cartPopup = document.getElementById('cart-popup');
+  const btnCloseCart = document.getElementById('btn-close-cart');
+  cartIcon.addEventListener('click', () => {
+    if(cartPopup.style.display === 'flex'){
+      closeCartPopup();
+    } else {
+      openCartPopup();
+    }
+  });
+  btnCloseCart.addEventListener('click', () => closeCartPopup());
+  function openCartPopup(){
+    cartPopup.style.display = 'flex';
+    cartPopup.focus();
+  }
+  function closeCartPopup(){
+    cartPopup.style.display = 'none';
+  }
+
+  // Show/hide alamat input on pengambilan radio
   document.querySelectorAll('input[name="pengambilan"]').forEach(radio => {
     radio.addEventListener('change', e => {
       const alamatGroup = document.getElementById('alamat-group');
-      if(e.target.value === 'Diantar') {
+      if(e.target.value === 'Diantar'){
         alamatGroup.style.display = 'block';
         alamatGroup.querySelector('.delivery-note').style.display = 'block';
       } else {
@@ -759,7 +928,7 @@
     });
   });
 
-  // Prepare message & open WhatsApp
+  // Kirim ke WhatsApp
   function sendToWhatsApp(){
     const nama = document.getElementById('nama').value.trim();
     if(!nama){
@@ -770,17 +939,15 @@
       alert('Keranjang belanja kosong. Silakan tambahkan menu terlebih dahulu.');
       return;
     }
-
     const pengambilan = document.querySelector('input[name="pengambilan"]:checked').value;
     const alamatElem = document.getElementById('alamat');
     const alamat = alamatElem ? alamatElem.value.trim() : '';
 
-    if(pengambilan === 'Diantar' && alamat.length < 5){
+    if(pengambilan==='Diantar' && alamat.length < 5){
       alert('Mohon isi alamat pengantaran dengan lengkap.');
       alamatElem.focus();
       return;
     }
-
     const pembayaran = document.querySelector('input[name="pembayaran"]:checked').value;
 
     let pesan = `Halo, saya ${nama} ingin memesan:\n`;
@@ -801,8 +968,9 @@
     window.open(url, '_blank');
   }
 
-  // Awal load
+  // Init cart display on load
   updateCart();
+
 </script>
 </body>
 </html>
